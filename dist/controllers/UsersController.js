@@ -1,0 +1,90 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const database_1 = require("../database/database");
+const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
+const bcrypt = require('bcryptjs');
+class UsersController {
+    // registro
+    createUser(req, res) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const name = req.body.name;
+            const email = req.body.email;
+            const database = req.body.database;
+            const profile = req.body.profile;
+            const salt = yield bcrypt.genSalt(10);
+            const password = yield bcrypt.hash(req.body.password, salt);
+            const userExists = yield database_1.pool2.query('SELECT * FROM users.users WHERE email = $1', [email]);
+            if (userExists.rows.length > 0) {
+                return res.status(401).json('Usuario existente');
+            }
+            else {
+                try {
+                    const response = yield database_1.pool2.query('SELECT * FROM users.register_user ($1 ,$2, $3, $4, $5)', [name, email, password, database, profile]);
+                    //token
+                    const expiresIn = 60 * 60 * 24;
+                    const accessToken = jsonwebtoken_1.default.sign({ id: response.rows }, 'tokentest', { expiresIn: expiresIn });
+                    //return res.status(200).send({"response": response, "accessToken": accessToken, "expires_in": expiresIn});
+                    console.log(response.rows);
+                    return res.header('Auth-token', accessToken).json(response.rows);
+                }
+                catch (e) {
+                    console.log(e);
+                    return res.status(500).json('Internal Server Error');
+                }
+            }
+        });
+    }
+    ;
+    // login
+    getUsers(req, res) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const email = req.body.email;
+            const request = yield database_1.pool2.query('SELECT password FROM users.users WHERE email = $1', [email]);
+            if (request.rows.length <= 0)
+                return res.status(400).json('Usuario inexistente');
+            try {
+                const pass = JSON.stringify(request.rows);
+                const pass2 = pass.slice(14, -3);
+                const password = req.body.password;
+                const result = yield bcrypt.compare(password, pass2);
+                if (!result)
+                    return res.status(401).json('Password incorrecto');
+                const response = yield database_1.pool2.query('SELECT profile FROM users.users WHERE email = $1', [email]);
+                if (response.rows.length <= 0) {
+                    return res.status(400).json('Error credenciales');
+                }
+                else {
+                    const rows = JSON.stringify(response.rows);
+                    const profile = rows.slice(13, -3);
+                    const expiresIn = 60 * 60 * 24;
+                    const accessToken = jsonwebtoken_1.default.sign({ _id: response.rows }, 'tokentest', { expiresIn: expiresIn });
+                    //return res.status(200).send({"response": response, "accessToken": accessToken, "expires_in": expiresIn});
+                    return res.status(200).json(profile);
+                }
+                ;
+            }
+            catch (e) {
+                console.log(e);
+                return res.status(500).json('Internal Server Error');
+            }
+        });
+    }
+    ;
+    profile(req, res) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            try {
+                const email = req.body.email;
+                const response = yield database_1.pool2.query('SELECT profile FROM users.users WHERE email = $1', [email]);
+                return res.status(200).json(response.rows);
+            }
+            catch (e) {
+                console.log(e);
+                return res.status(500).json('Internal Server Error');
+            }
+        });
+    }
+}
+const usersController = new UsersController();
+exports.default = usersController;
+//# sourceMappingURL=UsersController.js.map
