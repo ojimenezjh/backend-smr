@@ -22,7 +22,7 @@ class Server {
     }
     config() {
         // Puerto de conexión
-        this.app.set('port', process.env.PORT || 4000);
+        this.app.set('port', process.env.PORT || 3000);
         // Middlewares
         //this.app.use(morgan('dev')); // Muestra peticiones app por consola
         this.app.use(cors_1.default()); // Nos configura api
