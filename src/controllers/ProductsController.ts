@@ -56,10 +56,10 @@ class ProductsController {
         try {
         const pool = poolaso();
         const id_carta = req.params.id_carta;
-        const id_productos: [] = req.body.id_productos;
+        const id_productos = [1,2]
         console.log(id_carta)
         console.log(id_productos)
-        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,ARRAY$2::int[])', [id_carta, id_productos]);
+        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2::int[])', [id_carta, id_productos]);
         console.log(id_carta)
         console.log(id_productos)
         return res.json({
