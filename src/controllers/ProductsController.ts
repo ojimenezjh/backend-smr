@@ -56,18 +56,10 @@ class ProductsController {
         try {
         const pool = poolaso();
         const id_carta = req.params.id_carta;
-        //var id_productos = new Array();
-        var id_productos = new Array();
-        var item;
-        for(item of req.body.id_productos){ 
-          if (Array.isArray(id_productos)){
-            id_productos.push(item);
-          }
-        }
-        //const id_productos = (req.body.id_productos);
-        //id_productos = 
-        console.log(id_productos)
-        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_productos]);
+        const id_productos = (req.body.id_productos);
+        var id_products = new Array();
+        id_products = JSON.parse(id_productos);           
+        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_products]);
         console.log(id_carta)
         console.log(id_productos)
         return res.json({
@@ -77,7 +69,7 @@ class ProductsController {
         catch(e){
             
             console.log(e);
-            return res.status(500).json('Internal Server Error');
+            return res.status(500).json(id_products);
         }
     };
 
