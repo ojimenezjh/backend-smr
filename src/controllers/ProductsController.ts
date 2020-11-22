@@ -57,7 +57,7 @@ class ProductsController {
         const pool = poolaso();
         const id_carta = req.params.id_carta;
         var id_productos = new Array();
-        id_productos = JSON.parse(req.body.id_productos);
+        id_productos = (req.body.id_productos);
         //id_productos = 
         console.log(id_productos)
         const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_productos]);
