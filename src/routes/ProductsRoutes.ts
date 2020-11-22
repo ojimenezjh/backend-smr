@@ -17,6 +17,8 @@ class ProductsRoutes {
         this.router.get("/:id_producto", productsController.getProductbyId);
         this.router.get("/:carta/:products/:id_carta", productsController.getProductbyCard);
         this.router.get("/:products/:producto", productsController.getProductbyName);
+
+        this.router.post("/:products/:id_carta", productsController.insertProductsByCard);
        
 
     }

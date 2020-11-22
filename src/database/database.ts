@@ -1,6 +1,5 @@
-import { Pool } from 'pg';
+import { Pool, QueryResult } from 'pg';
 import { Request, Response, NextFunction } from 'express';
-import { QueryResult } from 'pg';
 
 var db2: string;
 // CONFIG ALEX

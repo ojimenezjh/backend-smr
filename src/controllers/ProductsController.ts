@@ -52,6 +52,23 @@ class ProductsController {
         }
     };
 
+    public async insertProductsByCard(req: Request, res: Response) : Promise<Response> {
+        try {
+        const pool = poolaso();
+        const { id_carta, id_productos } = req.body
+        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_productos]);
+        console.log(id_carta)
+        console.log(response.rows)
+        return res.json({
+            message: 'Products added succesfully'
+        });
+        }
+        catch(e){
+            
+            console.log(e);
+            return res.status(500).json('Internal Server Error');
+        }
+    };
 
     public async getProductbyName(req: Request, res: Response) : Promise<Response> {   
         try{
