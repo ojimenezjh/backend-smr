@@ -59,7 +59,7 @@ class ProductsController {
         const id_producto = req.body.id_producto;
         var id_products;
         id_products = JSON.parse(id_producto);         
-        const response: QueryResult = await pool.query('INSERT INTO comida.carta_producto VALUES($1,$2)', [id_carta, id_products]);
+        const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_products]);
         console.log(id_carta)
         //console.log(id_productos)
         return res.json({
