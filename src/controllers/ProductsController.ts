@@ -55,13 +55,13 @@ class ProductsController {
     public async insertProductsByCard(req: Request, res: Response) : Promise<Response> {
         try {
         const pool = poolaso();
-        const id_carta = req.params.id_carta;
-        const id_productos = req.body.id_productos;
+        const id_carta = req.body.id_carta;
+        const id_producto = req.body.id_producto;
         var id_products;
-        id_products = JSON.parse(id_productos);           
-        const response: QueryResult = await pool.query('INSERT INTO comida.carta_producto VALUES($1,$2)', [id_carta, id_productos]);
+        id_products = JSON.parse(id_producto);         
+        const response: QueryResult = await pool.query('INSERT INTO comida.carta_producto VALUES($1,$2)', [id_carta, id_products]);
         console.log(id_carta)
-        console.log(id_productos)
+        //console.log(id_productos)
         return res.json({
             message: 'Products added succesfully'
         });
@@ -69,7 +69,7 @@ class ProductsController {
         catch(e){
             
             console.log(e);
-            return res.status(500).json(id_products);
+            return res.status(500).json('Internal Server Error');
         }
     };
 
