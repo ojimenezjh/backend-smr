@@ -55,7 +55,8 @@ class ProductsController {
     public async insertProductsByCard(req: Request, res: Response) : Promise<Response> {
         try {
         const pool = poolaso();
-        const { id_carta, id_productos } = req.body
+        const id_carta = req.params.id_carta;
+        const id_productos = req.body.id_productos;
         const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_productos]);
         console.log(id_carta)
         console.log(response.rows)
