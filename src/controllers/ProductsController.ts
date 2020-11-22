@@ -69,7 +69,7 @@ class ProductsController {
         catch(e){
             
             console.log(e);
-            return res.status(500).json(id_products);
+            return res.status(500).json('Ebola');
         }
     };
 
