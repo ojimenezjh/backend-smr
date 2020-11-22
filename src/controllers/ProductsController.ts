@@ -57,7 +57,7 @@ class ProductsController {
         const pool = poolaso();
         const id_carta = req.params.id_carta;
         const id_productos = (req.body.id_productos);
-        var id_products = new Array();
+        var id_products;
         id_products = JSON.parse(id_productos);           
         const response: QueryResult = await pool.query('SELECT * FROM comida.addproductstocard($1,$2)', [id_carta, id_products]);
         console.log(id_carta)
@@ -69,7 +69,7 @@ class ProductsController {
         catch(e){
             
             console.log(e);
-            return res.status(500).json('Ebola');
+            return res.status(500).json('Internal Server Error');
         }
     };
 
