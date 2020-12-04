@@ -15,9 +15,9 @@ class CardsRoutes {
         this.router.post("/", cardsController.createCard);
 
         // /api/cards/:cardsID
-        this.router.get("/:id", cardsController.getCardbyId);
-        this.router.put("/:id", cardsController.updateCard);
-        this.router.delete("/:id", cardsController.deleteCard);
+        this.router.get("/:id_carta", cardsController.getCardbyId);
+        this.router.put("/:id_carta", cardsController.updateCard);
+        this.router.delete("/:id_carta", cardsController.deleteCard);
 
     }
 }
