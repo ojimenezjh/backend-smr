@@ -35,7 +35,9 @@ class CardsController {
 
     public async createCard(req: Request, res: Response): Promise<Response> {
         const pool = poolaso();
-        const { nombre, descripcion, hora_inicio, hora_fin, imagen } = req.body;
+        var { nombre, descripcion, hora_inicio, hora_fin, imagen } = req.body;
+        if (hora_inicio == ''){hora_inicio = 'null'}
+        if (hora_fin == ''){hora_fin = 'null'}
         const response: QueryResult = await pool.query('INSERT INTO comida.cartas (id_carta, nombre, descripcion, hora_inicio, hora_fin, imagen, posicion) VALUES ((SELECT CASE WHEN (NOT EXISTS (SELECT id_carta from comida.cartas)) THEN 1 ELSE (SELECT MAX(id_carta)+1 FROM comida.cartas) END), $1, $2, $3, $4, $5, (SELECT MAX(posicion)+1 FROM comida.cartas))', [nombre, descripcion, hora_inicio, hora_fin, imagen]);
         return res.json({
             message: 'Card created succesfully',
