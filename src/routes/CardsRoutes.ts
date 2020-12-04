@@ -12,9 +12,12 @@ class CardsRoutes {
     config(): void {
         // /api/cards
         this.router.get("/",  cardsController.getCards);
+        this.router.post("/", cardsController.createCard);
 
         // /api/cards/:cardsID
         this.router.get("/:id", cardsController.getCardbyId);
+        this.router.put("/:id", cardsController.updateCard);
+        this.router.delete("/:id", cardsController.deleteCard);
 
     }
 }
