@@ -19,7 +19,9 @@ class ProductsRoutes {
         this.router.get("/:products/:producto", productsController.getProductbyName);
 
         this.router.post("/", productsController.insertProductsByCard);
+        this.router.post("/save", productsController.createProduct);
        
+        this.router.put("/", productsController.insertProductsByCard);
 
     }
 }
