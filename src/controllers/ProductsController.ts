@@ -89,8 +89,8 @@ class ProductsController {
 
     public async createProduct(req: Request, res: Response): Promise<Response> {
         const pool = poolaso();
-        var { id_producto, imagen, producto, familia, tipoveg, gluten, descripicion, posicion, precio } = req.body;
-        const response: QueryResult = await pool.query('INSERT INTO comida.productos (id_producto, producto, familia, tipoveg, gluten, descripicion, posicion, precio) VALUES ((SELECT CASE WHEN (NOT EXISTS (SELECT id_producto from comida.productos)) THEN 1 ELSE (SELECT MAX(id_producto)+1 FROM comida.productos) END), $1, $2, $3, $4, $5, (SELECT MAX(posicion)+1 FROM comida.productos), $6)', [producto, familia, tipoveg, gluten, descripicion, precio]);
+        var { id_producto, imagen, producto, familia, tipoveg, gluten, descripcion, posicion, precio } = req.body;
+        const response: QueryResult = await pool.query('INSERT INTO comida.productos (id_producto, producto, familia, tipoveg, gluten, descripcion, posicion, precio) VALUES ((SELECT CASE WHEN (NOT EXISTS (SELECT id_producto from comida.productos)) THEN 1 ELSE (SELECT MAX(id_producto)+1 FROM comida.productos) END), $1, $2, $3, $4, $5, (SELECT MAX(posicion)+1 FROM comida.productos), $6)', [producto, familia, tipoveg, gluten, descripcion, precio]);
         return res.json({
             message: 'Product created succesfully',
             body: {
@@ -101,7 +101,7 @@ class ProductsController {
                     familia, 
                     tipoveg, 
                     gluten, 
-                    descripicion,
+                    descripcion,
                     posicion, 
                     precio
                 }
@@ -111,8 +111,8 @@ class ProductsController {
     public async updateProduct(req: Request, res: Response): Promise<Response> {
         const pool = poolaso();
         const id_producto = parseInt(req.params.id_producto);
-        const {imagen, producto, familia, tipoveg, gluten, descripicion, posicion, precio } = req.body;
-        const response: QueryResult = await pool.query('UPDATE comida.productos SET imagen = $1, producto = $2, familia = $3, tipoveg= $4, gluten = $5, descripcion = $6, precio = $7 WHERE id_producto = $8', [imagen, producto, familia, tipoveg, gluten, descripicion, precio, id_producto]);
+        const {imagen, producto, familia, tipoveg, gluten, descripcion, posicion, precio } = req.body;
+        const response: QueryResult = await pool.query('UPDATE comida.productos SET imagen = $1, producto = $2, familia = $3, tipoveg= $4, gluten = $5, descripcion = $6, precio = $7 WHERE id_producto = $8', [imagen, producto, familia, tipoveg, gluten, descripcion, precio, id_producto]);
         return res.json({
             message: `Product ${id_producto} updated succesfully`
         });
