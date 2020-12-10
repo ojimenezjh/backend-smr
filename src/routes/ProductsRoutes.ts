@@ -21,7 +21,7 @@ class ProductsRoutes {
         this.router.post("/", productsController.insertProductsByCard);
         this.router.post("/save", productsController.createProduct);
        
-        this.router.put("/", productsController.insertProductsByCard);
+        this.router.put("/:id_producto", productsController.updateProduct);
 
     }
 }
