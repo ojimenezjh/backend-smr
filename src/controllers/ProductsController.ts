@@ -90,6 +90,8 @@ class ProductsController {
     public async createProduct(req: Request, res: Response): Promise<Response> {
         const pool = poolaso();
         var { id_producto, imagen, producto, familia, tipoveg, gluten, descripcion, posicion, precio } = req.body;
+        if(gluten = false) gluten = 0;
+        else gluten = 1;
         console.log('Este es el request body bro: ',req.body);
         const response: QueryResult = await pool.query('INSERT INTO comida.productos (id_producto, producto, familia, tipoveg, gluten, descripcion, posicion, precio) VALUES ((SELECT CASE WHEN (NOT EXISTS (SELECT id_producto from comida.productos)) THEN 1 ELSE (SELECT MAX(id_producto)+1 FROM comida.productos) END), $1, $2, $3, $4, $5, (SELECT MAX(posicion)+1 FROM comida.productos), $6)', [producto, familia, tipoveg, gluten, descripcion, precio]);
         return res.json({
