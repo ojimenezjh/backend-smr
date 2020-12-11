@@ -118,6 +118,15 @@ class ProductsController {
         });
     };
 
+    public async deleteProduct(req: Request, res: Response): Promise<Response> {
+        const pool = poolaso();
+        const id_producto = parseInt(req.params.id_producto);
+        await pool.query('DELETE FROM comida.productos WHERE id_producto = $1', [id_producto]);
+        return res.json({
+            message: `Product ${id_producto} deleted succesfully`
+        });
+    };
+
 }
 
 const productsController = new ProductsController();

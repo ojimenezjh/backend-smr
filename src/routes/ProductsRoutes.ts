@@ -23,6 +23,8 @@ class ProductsRoutes {
        
         this.router.put("/:id_producto", productsController.updateProduct);
 
+        this.router.delete("/:id_producto", productsController.deleteProduct);
+
     }
 }
 
