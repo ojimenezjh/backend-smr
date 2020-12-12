@@ -25,6 +25,8 @@ class ProductsRoutes {
 
         this.router.delete("/:id_producto", productsController.deleteProduct);
 
+        this.router.delete("/carta/:id_carta/:id_producto", productsController.deleteProductInCard);
+
     }
 }
 
