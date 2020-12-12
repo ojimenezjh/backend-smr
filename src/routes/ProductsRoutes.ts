@@ -2,7 +2,7 @@ import { Router } from 'express';
 import productsController from '../controllers/ProductsController';
 
 class ProductsRoutes {
-  
+
     public router: Router = Router();
 
     constructor() {
@@ -11,7 +11,7 @@ class ProductsRoutes {
 
     config(): void {
         // /api/cards
-        this.router.get("/",  productsController.getProducts);
+        this.router.get("/", productsController.getProducts);
 
         // /api/cards/:cardsID
         this.router.get("/:id_producto", productsController.getProductbyId);
@@ -20,7 +20,7 @@ class ProductsRoutes {
 
         this.router.post("/", productsController.insertProductsByCard);
         this.router.post("/save", productsController.createProduct);
-       
+
         this.router.put("/:id_producto", productsController.updateProduct);
 
         this.router.delete("/:id_producto", productsController.deleteProduct);
