@@ -13,7 +13,7 @@ class CardsRoutes {
         // /api/cards
         this.router.get("/",  cardsController.getCards);
         this.router.post("/", cardsController.createCard);
-        this.router.post("/upload", cardsController.postPhoto);
+        //this.router.post("/upload", cardsController.postPhoto);
 
         // /api/cards/:cardsID
         this.router.get("/:id_carta", cardsController.getCardbyId);

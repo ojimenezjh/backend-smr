@@ -72,14 +72,14 @@ class CardsController {
         });
     };
 
-    public async postPhoto(req: Request, res: Response) {
+/*     public async postPhoto(req: Request, res: Response) {
         let file = req.body;
         file.mv(`./files/${file.name}`,err => {
             if(err) return res.status(500).send({ message : err })
         return res.status(200).send({ message : 'File upload' })
     })
     }
-
+ */
 }
 
 const cardsController = new CardsController();
