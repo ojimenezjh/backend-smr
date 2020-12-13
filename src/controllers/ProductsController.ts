@@ -136,7 +136,6 @@ class ProductsController {
             message: `Product ${id_producto} deleted succesfully from ${id_carta}`
         });
     };
-
 }
 
 const productsController = new ProductsController();

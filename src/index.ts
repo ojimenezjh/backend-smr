@@ -1,4 +1,5 @@
 import express, { json, Application, Router } from 'express';
+const fileUpload = require('express-fileupload')
 import morgan from 'morgan';
 import cors from 'cors';
 import usersController  from './controllers/UsersController';
@@ -35,6 +36,7 @@ class Server {
         this.app.use(cors()); // Nos configura api
         this.app.use(json()); // Servidor entiende archivos json
         this.app.use(express.urlencoded({extended: false})); // Servidor puede transformar datos formularios html a json
+        this.app.use(fileUpload());
     }
 
     
