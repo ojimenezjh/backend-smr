@@ -37,13 +37,7 @@ class Server {
         this.app.use(json()); // Servidor entiende archivos json
         this.app.use(express.urlencoded({extended: false})); // Servidor puede transformar datos formularios html a json
         this.app.use(fileUpload());
-        this.app.post('/upload',(req,res) => {
-            let EDFile = req.body;
-            EDFile.mv(`./files/${EDFile.name}`,err => {
-                if(err) return res.status(500).send({ message : err })
-                return res.status(200).send({ message : 'File upload' })
-            })
-        })
+ 
     }
 
     
@@ -59,6 +53,13 @@ class Server {
         this.app.use('/', corpRoutes);
         this.app.use('/', usersRoutes);
         this.app.use('/', mesasRoutes);
+        this.app.post('/upload',(req,res) => {
+            let EDFile = req.body;
+            EDFile.mv(`./files/${EDFile.name}`,err => {
+                if(err) return res.status(500).send({ message : err })
+                return res.status(200).send({ message : 'File upload' })
+            })
+        })
 
     }
     start(): void {
