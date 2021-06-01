@@ -35,8 +35,8 @@ var db2: string;
 
 export const pool2 = new Pool({
   user: 'postgres',
-  host: '82.223.128.240',
-  password: 'adriparguela123',
+  host: 'xxxxxx',
+  password: 'xxxxxx',
   port: 5432,
   database: 'postgres'
 });
@@ -52,8 +52,8 @@ export const pool2 = new Pool({
 export function poolaso() {
 return  new Pool ({
   user: 'postgres',
-  host: '82.223.128.240',
-  password: 'adriparguela123',
+  host: 'xxxxx',
+  password: 'xxxxxx',
   port: 5432,
   database: database_usuario()
 });
