@@ -2,14 +2,6 @@ import { Pool, QueryResult } from 'pg';
 import { Request, Response, NextFunction } from 'express';
 
 var db2: string;
-// CONFIG ALEX
-
-/*export const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    password: '12345678',
-    port: 5433
-});*/
 
 // CONFIG OSCAR
 
@@ -35,25 +27,17 @@ var db2: string;
 
 export const pool2 = new Pool({
   user: 'postgres',
-  host: '82.223.128.240',
-  password: 'adriparguela123',
+  host: 'xxxx',
+  password: 'xxxx',
   port: 5432,
   database: 'postgres'
 });
 
-/*export var pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    password: '12345678',
-    port: 5432,
-    database: ''//db2//database_usuario(db2)
-    
-});*/
 export function poolaso() {
 return  new Pool ({
   user: 'postgres',
-  host: '82.223.128.240',
-  password: 'adriparguela123',
+  host: 'xxxx',
+  password: 'xxxx',
   port: 5432,
   database: database_usuario()
 });
